@@ -219,7 +219,11 @@ func StopLocustMasterCommand(ctx context.Context, client SSMRunCommand, optFns .
 }
 
 func main() {
-	err := godotenv.Load()
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	err = godotenv.Load(path + "/.env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
